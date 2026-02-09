@@ -4,7 +4,10 @@
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "db:push": "prisma db push",
+    "db:seed": "prisma db seed",
+    "generate": "prisma generate"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

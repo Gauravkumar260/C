@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -41,7 +41,7 @@ enum OptionType {
 }
 
 model User {
-  id             String          @id @default(uuid())
+  id             String          @id @default(auto()) @map("_id") @db.ObjectId
   email          String          @unique
   password       String
   name           String?
@@ -55,13 +55,13 @@ model User {
 }
 
 model Vehicle {
-  id             String                @id @default(uuid())
+  id             String                @id @default(auto()) @map("_id") @db.ObjectId
   make           String
   model          String
   slug           String                @unique
-  basePrice      Decimal
+  basePrice      Float
   description    String?
-  assets         String?               @default("{}") // JSON string
+  assets         Json?                 @default("{}")
   options        ConfigurationOption[]
   createdAt      DateTime              @default(now())
   updatedAt      DateTime              @updatedAt
@@ -69,47 +69,47 @@ model Vehicle {
 }
 
 model ConfigurationOption {
-  id               String      @id @default(uuid())
+  id               String     @id @default(auto()) @map("_id") @db.ObjectId
   name             String
   type             OptionType
-  price            Decimal
-  vehicleId        String
-  vehicle          Vehicle     @relation(fields: [vehicleId], references: [id])
-  assets           String?     @default("{}")
-  incompatibleWith String?     @default("[]")
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
+  price            Float
+  vehicleId        String     @db.ObjectId
+  vehicle          Vehicle    @relation(fields: [vehicleId], references: [id])
+  assets           Json?      @default("{}")
+  incompatibleWith Json?      @default("[]")
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
 }
 
 model Customization {
-  id        String   @id @default(uuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  vehicleId String
-  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
-  config    String   // JSON string
-  preview   String?
-  totalPrice Decimal
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  orders    Order[]
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id])
+  vehicleId  String   @db.ObjectId
+  vehicle    Vehicle  @relation(fields: [vehicleId], references: [id])
+  config     Json
+  preview    String?
+  totalPrice Float
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  orders     Order[]
 }
 
 model Order {
-  id              String        @id @default(uuid())
-  userId          String
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String        @db.ObjectId
   user            User          @relation(fields: [userId], references: [id])
-  customizationId String
+  customizationId String        @db.ObjectId
   customization   Customization @relation(fields: [customizationId], references: [id])
-  totalPrice      Decimal
+  totalPrice      Float
   status          OrderStatus   @default(PENDING)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 }
 
 model Booking {
-  id            String        @id @default(uuid())
-  userId        String
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String        @db.ObjectId
   user          User          @relation(fields: [userId], references: [id])
   dealershipId  String
   scheduledTime DateTime

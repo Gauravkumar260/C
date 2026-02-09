@@ -7,10 +7,9 @@ export class CreateCustomizationDto {
   @IsNotEmpty()
   vehicleId: string;
 
-  @ApiProperty({ example: '{"COLOR": "option-uuid", "WHEELS": "option-uuid"}' })
-  @IsString()
+  @ApiProperty({ example: { COLOR: "option-uuid", WHEELS: "option-uuid" } })
   @IsNotEmpty()
-  config: string;
+  config: any;
 
   @ApiProperty({ example: 50000 })
   @IsNumber()

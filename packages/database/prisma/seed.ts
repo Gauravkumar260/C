@@ -38,10 +38,10 @@ async function main() {
       slug: 'model-x',
       basePrice: 45000,
       description: 'The ultimate electric sedan.',
-      assets: JSON.stringify({
+      assets: {
         thumbnail: '/assets/vehicles/model-x/thumb.png',
         modelUrl: '/assets/vehicles/model-x/scene.glb',
-      }),
+      },
     },
   });
 
@@ -52,10 +52,10 @@ async function main() {
       slug: 'model-y',
       basePrice: 55000,
       description: 'Performance SUV for the modern family.',
-      assets: JSON.stringify({
+      assets: {
         thumbnail: '/assets/vehicles/model-y/thumb.png',
         modelUrl: '/assets/vehicles/model-y/scene.glb',
-      }),
+      },
     },
   });
 
@@ -67,7 +67,7 @@ async function main() {
       type: 'COLOR',
       price: 0,
       vehicleId: modelX.id,
-      assets: JSON.stringify({ hex: '#050505' }),
+      assets: { hex: '#050505' },
     },
   });
 
@@ -77,7 +77,7 @@ async function main() {
       type: 'COLOR',
       price: 1500,
       vehicleId: modelX.id,
-      assets: JSON.stringify({ hex: '#00f3ff' }),
+      assets: { hex: '#00f3ff' },
     },
   });
 
@@ -88,7 +88,7 @@ async function main() {
       type: 'WHEELS',
       price: 0,
       vehicleId: modelX.id,
-      assets: JSON.stringify({ texture: 'wheel_aero.png' }),
+      assets: { texture: 'wheel_aero.png' },
     },
   });
 
@@ -98,7 +98,7 @@ async function main() {
       type: 'WHEELS',
       price: 2000,
       vehicleId: modelX.id,
-      assets: JSON.stringify({ texture: 'wheel_turbine.png' }),
+      assets: { texture: 'wheel_turbine.png' },
     },
   });
 
