@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  DEALER
+  ADMIN
+}
+
+enum KycStatus {
+  PENDING
+  VERIFIED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FULFILLED
+  CANCELLED
+}
+
+enum OptionType {
+  COLOR
+  WHEELS
+  TRIM
+  INTERIOR
+  ACCESSORY
+}
+
+model User {
+  id             String          @id @default(uuid())
+  email          String          @unique
+  password       String
+  name           String?
+  role           Role            @default(CUSTOMER)
+  kycStatus      KycStatus       @default(PENDING)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  bookings       Booking[]
+  orders         Order[]
+  customizations Customization[]
+}
+
+model Vehicle {
+  id             String                @id @default(uuid())
+  make           String
+  model          String
+  slug           String                @unique
+  basePrice      Decimal
+  description    String?
+  assets         String?               @default("{}") // JSON string
+  options        ConfigurationOption[]
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  customizations Customization[]
+}
+
+model ConfigurationOption {
+  id               String      @id @default(uuid())
+  name             String
+  type             OptionType
+  price            Decimal
+  vehicleId        String
+  vehicle          Vehicle     @relation(fields: [vehicleId], references: [id])
+  assets           String?     @default("{}")
+  incompatibleWith String?     @default("[]")
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+model Customization {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
+  config    String   // JSON string
+  preview   String?
+  totalPrice Decimal
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+}
+
+model Order {
+  id              String        @id @default(uuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id])
+  customizationId String
+  customization   Customization @relation(fields: [customizationId], references: [id])
+  totalPrice      Decimal
+  status          OrderStatus   @default(PENDING)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model Booking {
+  id            String        @id @default(uuid())
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+  dealershipId  String
+  scheduledTime DateTime
+  status        BookingStatus @default(PENDING)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([dealershipId, scheduledTime])
+}

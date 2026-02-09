@@ -1,0 +1,179 @@
+[
+    {
+        "id": "spectre-gt",
+        "name": "Spectre GT",
+        "price": 125000,
+        "description": "The ultimate grand tourer. Silent, deadly, and undeniably present.",
+        "speed": "2.9s",
+        "topSpeed": "210 mph",
+        "power": "750 hp",
+        "colors": [
+            {
+                "id": "void-black",
+                "name": "Void Black",
+                "hex": "#0a0a0a",
+                "price": 0
+            },
+            {
+                "id": "neon-red",
+                "name": "Neon Red",
+                "hex": "#ff003c",
+                "price": 5000
+            },
+            {
+                "id": "cyber-silver",
+                "name": "Cyber Silver",
+                "hex": "#c0c0c0",
+                "price": 2500
+            }
+        ],
+        "rims": [
+            {
+                "id": "turbine-20",
+                "name": "Turbine 20\"",
+                "image": "/rims/turbine.png",
+                "price": 0
+            },
+            {
+                "id": "carbon-21",
+                "name": "Carbon 21\"",
+                "image": "/rims/carbon.png",
+                "price": 4000
+            }
+        ],
+        "interiors": [
+            {
+                "id": "leather-black",
+                "name": "Midnight Leather",
+                "material": "Leather",
+                "hex": "#111",
+                "price": 0
+            },
+            {
+                "id": "alcantara-grey",
+                "name": "Storm Alcantara",
+                "material": "Alcantara",
+                "hex": "#333",
+                "price": 3000
+            }
+        ]
+    },
+    {
+        "id": "phantom-x",
+        "name": "Phantom X",
+        "price": 180000,
+        "description": "A ghost in the machine. Pure electric luxury with zero compromise.",
+        "speed": "2.1s",
+        "topSpeed": "250 mph",
+        "power": "1100 hp",
+        "colors": [
+            {
+                "id": "ghost-white",
+                "name": "Ghost White",
+                "hex": "#f8f8ff",
+                "price": 0
+            },
+            {
+                "id": "matte-black",
+                "name": "Matte Black",
+                "hex": "#1a1a1a",
+                "price": 6000
+            },
+            {
+                "id": "neon-blue",
+                "name": "Neon Blue",
+                "hex": "#00f3ff",
+                "price": 5000
+            }
+        ],
+        "rims": [
+            {
+                "id": "aero-21",
+                "name": "Aero 21\"",
+                "image": "/rims/aero.png",
+                "price": 0
+            },
+            {
+                "id": "stealth-22",
+                "name": "Stealth 22\"",
+                "image": "/rims/stealth.png",
+                "price": 5000
+            }
+        ],
+        "interiors": [
+            {
+                "id": "vegan-white",
+                "name": "Cloud Fabric",
+                "material": "Synthetics",
+                "hex": "#eee",
+                "price": 0
+            },
+            {
+                "id": "carbon-fiber",
+                "name": "Carbon Weave",
+                "material": "Carbon",
+                "hex": "#222",
+                "price": 4500
+            }
+        ]
+    },
+    {
+        "id": "vanguard-s",
+        "name": "Vanguard S",
+        "price": 95000,
+        "description": "Tactical precision for the everyday mission. Robust, rugged, refined.",
+        "speed": "3.5s",
+        "topSpeed": "180 mph",
+        "power": "600 hp",
+        "colors": [
+            {
+                "id": "army-green",
+                "name": "Tactical Green",
+                "hex": "#4b5320",
+                "price": 0
+            },
+            {
+                "id": "desert-sand",
+                "name": "Desert Sand",
+                "hex": "#edc9af",
+                "price": 1500
+            },
+            {
+                "id": "steel-grey",
+                "name": "Steel Grey",
+                "hex": "#71797e",
+                "price": 0
+            }
+        ],
+        "rims": [
+            {
+                "id": "offroad-19",
+                "name": "Offroad 19\"",
+                "image": "/rims/offroad.png",
+                "price": 0
+            },
+            {
+                "id": "beadlock-20",
+                "name": "Beadlock 20\"",
+                "image": "/rims/beadlock.png",
+                "price": 2500
+            }
+        ],
+        "interiors": [
+            {
+                "id": "fabric-camo",
+                "name": "Urban Camo",
+                "material": "Fabric",
+                "hex": "#555",
+                "price": 0
+            },
+            {
+                "id": "leather-brown",
+                "name": "Saddle Leather",
+                "material": "Leather",
+                "hex": "#8b4513",
+                "price": 2000
+            }
+        ]
+    }
+]

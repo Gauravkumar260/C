@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        working-directory: packages/database
+        run: npx prisma generate
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build API
+        run: npm run build -w apps/api
+
+      - name: Build Web
+        run: npm run build -w apps/web
+
+      # Optional: Build Docker images to verify Dockerfiles
+      - name: Build API Docker Image
+        run: docker build -f apps/api/Dockerfile .
+
+      - name: Build Web Docker Image
+        run: docker build -f apps/web/Dockerfile .
