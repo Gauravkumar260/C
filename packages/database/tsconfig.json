@@ -1,11 +1,19 @@
 {
     "compilerOptions": {
+        "module": "commonjs",
+        "declaration": true,
+        "target": "ES2019",
         "sourceMap": true,
         "outDir": "dist",
+        "skipLibCheck": true,
         "strict": true,
         "lib": [
             "esnext"
         ],
         "esModuleInterop": true
-    }
+    },
+    "include": [
+        ".",
+        "./prisma/seed.ts"
+    ]
 }

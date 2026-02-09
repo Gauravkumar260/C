@@ -63,7 +63,9 @@ const carImages: Record<string, string> = {
   'vanguard-s': '/cars/inferno.jpg', // Fallback for vanguard-s as it wasn't in prototype list but inferno matches style
 };
 
-export const cars: Car[] = (carsData as any[]).map(car => ({
+type RawCar = Omit<Car, 'image'>;
+
+export const cars: Car[] = (carsData as unknown as RawCar[]).map(car => ({
   ...car,
   image: carImages[car.id] || '/hero-car.jpg'
 }));

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Check, ArrowRight, ArrowLeft, ChevronRight, Paintbrush, Armchair, CircleDot, Sparkles, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useConfigStore, Vehicle, Option } from '@/store/config';
+import Footer from '@/components/Footer';
 
 interface RichConfiguratorProps {
   vehicle: Vehicle;

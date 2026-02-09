@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import CarCard from '@/components/CarCard';
+import CarCard from '@/components/home/CarCard';
 import { cars } from '@/data/cars';
 
 const categories = [

@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 
 async function getVehicles() {
   try {
-    const res = await fetch("http://localhost:4000/vehicles", { cache: "no-store" });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/vehicles`, { cache: "no-store" });
     if (!res.ok) return [];
     return res.json();
   } catch (error) {

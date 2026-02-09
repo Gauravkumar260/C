@@ -13,6 +13,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { dealerships } from '@/data/cars';
 import { cn } from '@/lib/utils';
+import { fetchAPI } from '@/lib/api';
 
 const timeSlots = [
     '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
@@ -36,9 +37,34 @@ const BookingWizard = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsSubmitted(true);
+        try {
+            const userStr = localStorage.getItem('user');
+            const user = userStr ? JSON.parse(userStr) : null;
+
+            if (!user || !user.id) {
+                // If no user, maybe redirect to login or show error
+                // For now, we'll try to submit anyway, but it will likely fail on backend validation
+                // unless we have a guest flow. 
+                // Let's alert the user.
+                alert("Please log in to book a test drive.");
+                return;
+            }
+
+            await fetchAPI('/bookings', {
+                method: 'POST',
+                body: JSON.stringify({
+                    userId: user.id,
+                    dealershipId: selectedDealership,
+                    scheduledTime: new Date(`${format(selectedDate!, 'yyyy-MM-dd')} ${selectedTime}`),
+                }),
+            });
+            setIsSubmitted(true);
+        } catch (error) {
+            console.error("Booking failed", error);
+            // Handle error state (e.g., show toast)
+        }
     };
 
     const canProceedToStep2 = selectedDealership !== null;
